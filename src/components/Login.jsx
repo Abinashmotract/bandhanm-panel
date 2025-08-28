@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Grid, Box, Button, Typography, FormControl, RadioGroup, FormControlLabel, Radio } from "@mui/material";
-import { Email, Visibility, VisibilityOff, Lock, PersonOutlined } from "@mui/icons-material";
-import logo from "../assets/images/LOGO2.jpeg";
-import watermark from "../assets/images/watermark1.png";
-import Cookies from 'js-cookie';
-import "../css/login.scss";
+import { Box, Button, Typography, Fade } from "@mui/material";
+import { Email, Visibility, VisibilityOff, Lock } from "@mui/icons-material";
+import Cookies from "js-cookie";
 import Input from "../custom/Input";
 import axios from "axios";
 import { API_BASE_URL } from "../utils/apiConfig";
@@ -14,7 +10,6 @@ const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [panelType, setPanelType] = useState("adminpanel");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,59 +30,38 @@ const Login = ({ onLoginSuccess }) => {
       });
     } catch (error) {
       console.warn("Location not available", error);
-      return {}; // return empty object if location fetching fails
+      return {};
     }
   };
-
 
   const handleLogin = async () => {
     setError("");
     setIsLoading(true);
 
     try {
-      if (panelType === "adminpanel") {
-        if (!email || !password) {
-          setError("Please fill in all fields");
-          return;
-        }
-        const response = await axios.post(`${API_BASE_URL}/admin/login`, {
-          email,
-          password,
-        });
-        localStorage.removeItem("isAuthenticated");
-        localStorage.removeItem("token");
-        localStorage.removeItem("panelType");
-        localStorage.removeItem("stylistId");
-        localStorage.removeItem("vendorToken");
-        const token = response.data.token;
-        localStorage.setItem("isAuthenticated", "true");
-        Cookies.set("token", token, { expires: 1 });
-        localStorage.setItem("panelType", "admin");
-        onLoginSuccess(true, 'admin', token, null);
-      } else {
-        if (!email || !password) {
-          setError("Please fill in all fields");
-          return;
-        }
-        const location = await getCurrentLocation();
-        const response = await axios.post(`${API_BASE_URL}/auth/login`, {
-          email,
-          password,
-          role: "stylist",
-          latitude: location.latitude,
-          longitude: location.longitude
-        });
-
-        const token = response.data.token;
-        localStorage.removeItem("isAuthenticated");
-        localStorage.removeItem("token");
-        localStorage.removeItem("panelType");
-        localStorage.removeItem("vendorToken");
-        localStorage.setItem("isAuthenticated", "true");
-        Cookies.set("token", token, { expires: 1 });
-        localStorage.setItem("panelType", "vendor");
-        onLoginSuccess(true, "vendor", token);
+      // Admin login
+      if (!email || !password) {
+        setError("Please fill in all fields");
+        return;
       }
+      
+      const response = await axios.post(`${API_BASE_URL}/admin/login`, {
+        email,
+        password,
+      });
+      
+      localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("token");
+      localStorage.removeItem("panelType");
+      localStorage.removeItem("stylistId");
+      localStorage.removeItem("vendorToken");
+      
+      const token = response.data.token;
+      localStorage.setItem("isAuthenticated", "true");
+      Cookies.set("token", token, { expires: 1 });
+      localStorage.setItem("panelType", "admin");
+      onLoginSuccess(true, "admin", token, null);
+      
     } catch (error) {
       setError(error.response?.data?.message || "Login failed. Please try again.");
     } finally {
@@ -96,123 +70,108 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <Box className="login-container" sx={{ height: "100vh", display: "flex", flexDirection: "column", }}>
-      <Grid container spacing={0} sx={{ flex: 1 }}>
-        <Grid item xs={12} md={8} className="left-column" sx={{ position: "relative", overflow: "hidden", minHeight: { xs: "50vh", md: "100%" }, }}>
-          {/* <video autoPlay muted loop playsInline style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0, }}>
-            <source src={watermark1} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video> */}
-
-          <img src="https://imgs.search.brave.com/FGqh4uVn8vkK8qtN3N35kfRyWWJwWZgX-QyIUFe65Rs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzM4L2E0/L2I1LzM4YTRiNWY3/Njk0NzU5MGRjZTgx/YzhmOTk0NWY2YTIx/LmpwZw" />
-
+    <Box
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
+        overflow: "hidden",
+        p: 2,
+        // Background image with overlay
+        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Main login card */}
+      <Fade in={true} timeout={800}>
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: 450,
+            background: "rgba(255, 255, 255, 0.95)",
+            borderRadius: 4,
+            boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
+            overflow: "hidden",
+            zIndex: 10,
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          {/* Header with logo */}
           <Box
             sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              display: { xs: "none", md: "flex" },
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "flex-start",
-              zIndex: 2,
-              px: 8,
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              background: "linear-gradient(135deg, #8e44ad 0%, #6c3483 100%)",
+              py: 3,
+              textAlign: "center",
+              position: "relative",
             }}
           >
-            <Typography variant="h6" sx={{ color: "white" }}>
-              Welcome to
-            </Typography>
-            <Typography
-              variant="h2"
+            <Box
               sx={{
-                fontWeight: "bold",
-                color: "white",
-                fontSize: { sm: "2.5rem", md: "3rem" },
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mb: 1,
               }}
             >
-              MistriConnect
-            </Typography>
+              {/* Custom Bandhanam Logo SVG */}
+              <svg width="60" height="60" viewBox="0 0 60 60">
+                <circle cx="30" cy="30" r="28" fill="none" stroke="white" strokeWidth="2" />
+                <path d="M20,40 Q30,15 40,40" stroke="white" strokeWidth="2" fill="none" />
+                <circle cx="25" cy="25" r="4" fill="white" />
+                <circle cx="35" cy="25" r="4" fill="white" />
+                <path d="M25,35 L30,40 L35,35" stroke="white" strokeWidth="2" fill="none" />
+              </svg>
+            </Box>
             <Typography
-              variant="body1"
+              variant="h4"
               sx={{
                 color: "white",
-                maxWidth: { sm: 600, md: 800 },
-                mt: 2,
-                fontSize: { sm: "1rem" },
+                fontWeight: 500,
+                letterSpacing: 1,
               }}
             >
-              Find reliable mistri and labour workers for your home or commercial projects. Whether it’s carpentry, plumbing, electrical, or general repairs — get skilled professionals at your doorstep, quickly and affordably.
+              Bandhanam
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "rgba(255,255,255,0.8)",
+                mt: 0.5,
+              }}
+            >
+              Matrimony Admin Portal
             </Typography>
           </Box>
 
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={4}
-          className="right-column"
-          sx={{
-            position: { xs: "absolute", md: "relative" },
-            top: { xs: 0, md: "auto" },
-            left: { xs: 0, md: "auto" },
-            width: { xs: "100%", md: "auto" },
-            height: { xs: "100%", md: "auto" },
-            zIndex: { xs: 3, md: "auto" },
-            backgroundImage: {
-              xs: "none",
-              md: `url(${watermark})`,
-            },
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            px: { xs: 2, sm: 4 },
-            py: { xs: 4, md: 10 },
-          }}
-        >
-          <Box className="login-form" sx={{ width: "100%", maxWidth: 400 }}>
-            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-              <img src={logo} alt="logo" height="80" />
+          {/* Login form */}
+          <Box sx={{ p: 4 }}>
+            <Box sx={{ mb: 2 }}>
+              <Input
+                placeholder="Email Address"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                icon={<Email />}
+              />
             </Box>
-            <FormControl>
-              <RadioGroup row aria-labelledby="panel-selection" name="panel-selection" value={panelType} onChange={(e) => setPanelType(e.target.value)}>
-                <FormControlLabel value="adminpanel" control={<Radio />} label="ADMIN PANEL " />
-                <FormControlLabel value="vendorpanel" control={<Radio />} label="CONTRACTE PANEL" />
-              </RadioGroup>
-            </FormControl>
-            {panelType === "adminpanel" || panelType === "vendorpanel" ? (
-              <>
-                <Box className="mb-2">
-                  <Input
-                    placeholder="Email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    icon={<Email />}
-                    className="mb-2"
-                  />
-                </Box>
-                <Box>
-                  <Input
-                    placeholder="Password"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    icon={<Lock />}
-                    endIcon={showPassword ? <VisibilityOff /> : <Visibility />}
-                    onEndIconClick={() => setShowPassword(!showPassword)}
-                  />
-                </Box>
-              </>
-            ) : null}
+            <Box>
+              <Input
+                placeholder="Password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                icon={<Lock />}
+                endIcon={showPassword ? <VisibilityOff /> : <Visibility />}
+                onEndIconClick={() => setShowPassword(!showPassword)}
+              />
+            </Box>
 
             {error && (
-              <Typography color="error" sx={{ mt: 1, mb: 1 }}>
+              <Typography color="error" sx={{ mt: 2, textAlign: "center" }}>
                 {error}
               </Typography>
             )}
@@ -222,21 +181,35 @@ const Login = ({ onLoginSuccess }) => {
               fullWidth
               disabled={isLoading}
               sx={{
-                mt: 2,
-                bgcolor: "black",
+                mt: 3,
+                py: 1.5,
+                bgcolor: "#8e44ad",
                 color: "white",
-                "&:hover": { bgcolor: "grey" },
+                borderRadius: 2,
+                fontSize: "1rem",
+                fontWeight: 500,
+                "&:hover": { bgcolor: "#6c3483" },
               }}
               onClick={handleLogin}
             >
-              {isLoading ? "Logging in..." : "Login"}
+              {isLoading ? "Logging in..." : "Login to Dashboard"}
             </Button>
+
+            <Typography
+              variant="body2"
+              sx={{
+                textAlign: "center",
+                mt: 3,
+                color: "text.secondary",
+                fontSize: "0.8rem",
+              }}
+            >
+              Secure access for authorized personnel only
+            </Typography>
           </Box>
-        </Grid>
-
-      </Grid>
+        </Box>
+      </Fade>
     </Box>
-
   );
 };
 
