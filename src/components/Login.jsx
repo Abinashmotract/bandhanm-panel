@@ -80,7 +80,7 @@ const Login = ({ onLoginSuccess }) => {
         overflow: "hidden",
         p: 2,
         // Background image with overlay
-        backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80')",
+        backgroundImage: "linear-gradient(rgba(20.5, 12.5, 14.5, 5.5), rgba(5.5, 0.5, 10.5, 0.5)),url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?cs=srgb&dl=pexels-vireshstudio-1444442.jpg&fm=jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -103,7 +103,7 @@ const Login = ({ onLoginSuccess }) => {
           {/* Header with logo */}
           <Box
             sx={{
-              background: "linear-gradient(135deg, #8e44ad 0%, #6c3483 100%)",
+              background: "linear-gradient(135deg, #2f444d 0%, #353037 100%)",
               py: 3,
               textAlign: "center",
               position: "relative",
@@ -183,12 +183,13 @@ const Login = ({ onLoginSuccess }) => {
               sx={{
                 mt: 3,
                 py: 1.5,
-                bgcolor: "#8e44ad",
+                background: "linear-gradient(135deg, #2f444d 0%, #353037 100%)",
                 color: "white",
                 borderRadius: 2,
                 fontSize: "1rem",
                 fontWeight: 500,
-                "&:hover": { bgcolor: "#6c3483" },
+                textTransform: 'none',
+                "&:hover": { bgcolor: "linear-gradient(135deg, #2f444d 0%, #353037 100%)" },
               }}
               onClick={handleLogin}
             >
