@@ -28,28 +28,40 @@ const Header = ({ title, subtitle, path }) => {
         <Typography
           variant={isMobile ? "h4" : "h3"}
           fontWeight="bold"
-          color={colors.gray[100]}
+          color={colors.weddingPink[800]}
           mb="5px"
-          sx={{ fontSize: { xs: "1rem", sm: "1.5rem", md: "1rem" } }}
+          sx={{ 
+            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+            fontFamily: "Playfair Display, serif",
+            background: `linear-gradient(135deg, ${colors.weddingPink[600]} 0%, ${colors.weddingRose[600]} 100%)`,
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
         >
           {title}
         </Typography>
         <Typography
           variant={isMobile ? "h6" : "h5"}
-          color={colors.redAccent[400]}
-          sx={{ fontSize: { xs: "0.15rem", sm: "0.85rem", md: "0.75rem" } }}
+          color={colors.weddingGold[700]}
+          sx={{ 
+            fontSize: { xs: "0.9rem", sm: "1.1rem", md: "1.2rem" },
+            fontFamily: "Source Sans Pro, sans-serif",
+            fontWeight: 500
+          }}
         >
           {subtitle}
         </Typography>
       </Box>
       <Typography
         variant={isMobile ? "h6" : "h5"}
-        fontWeight="bold"
-        color={colors.gray[100]}
+        fontWeight="600"
+        color={colors.gray[600]}
         mb="5px"
         sx={{
-          fontSize: { xs: "0.8rem", sm: "1rem", md: "1.25rem" },
-          textAlign: { xs: "left", sm: "right" }
+          fontSize: { xs: "0.8rem", sm: "1rem", md: "1.1rem" },
+          textAlign: { xs: "left", sm: "right" },
+          fontFamily: "Source Sans Pro, sans-serif"
         }}
       >
         Home{pathName ? ` / ${pathName}` : ""}

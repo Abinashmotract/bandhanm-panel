@@ -8,7 +8,7 @@ import { useAuth } from "./utils/context/AuthContext";
 
 export const ToggledContext = createContext(null);
 
-function App({ panelType }) {
+function App() {
   const [theme, colorMode] = useMode();
   const [toggled, setToggled] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");

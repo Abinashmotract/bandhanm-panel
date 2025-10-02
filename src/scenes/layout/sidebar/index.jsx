@@ -24,6 +24,15 @@ import {
   AddCircleOutline,
   Close,
   HistoryOutlined,
+  CardMembershipOutlined,
+  AdminPanelSettingsOutlined,
+  AnalyticsOutlined,
+  ReportOutlined,
+  SettingsOutlined,
+  NotificationsOutlined,
+  FavoriteOutlined,
+  ChatOutlined,
+  VerifiedUserOutlined
 } from "@mui/icons-material";
 import Item from "./Item";
 import { ToggledContext } from "../../../App";
@@ -33,7 +42,7 @@ const SideBar = () => {
   const { toggled, setToggled } = useContext(ToggledContext);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const panelType = localStorage.getItem("panelType");
+  const panelType = "admin"; // Fixed to admin panel only
   const isMdDevices = useMediaQuery("(max-width:768px)");
   const isMobile = useMediaQuery("(max-width:480px)");
 
@@ -59,14 +68,15 @@ const SideBar = () => {
 
   const navSections = {
     admin: [
-      { title: "Labour/Contractors", path: "/labours", icon: <PeopleAltOutlined /> },
-      // { title: "Contracter", path: "/agent", icon: <PeopleAltOutlined /> },
-      { title: "Skills", path: "/skills", icon: <PeopleAltOutlined /> },
-      // { title: "Stylist Reviews", path: "/stylist-reviews", icon: <PersonOutlined /> },
-      // { title: "Products", path: "/product", icon: <PersonOutlined /> },
-      // { title: "Product Category", path: "/category", icon: <PeopleAltOutlined /> },
-      // { title: "Order Details", path: "/order-details", icon: <PeopleAltOutlined /> },
-      // { title: "Appointment Status", path: "/appointment-status", icon: <PersonOutlined /> },
+      { title: "User Management", path: "/user-management", icon: <PeopleAltOutlined /> },
+      { title: "Subscription Management", path: "/subscription-management", icon: <CardMembershipOutlined /> },
+      { title: "Matches & Connections", path: "/matches", icon: <FavoriteOutlined /> },
+      { title: "Messages & Chats", path: "/messages", icon: <ChatOutlined /> },
+      { title: "Verification Center", path: "/verification", icon: <VerifiedUserOutlined /> },
+      { title: "Reports & Analytics", path: "/analytics", icon: <AnalyticsOutlined /> },
+      { title: "Success Stories", path: "/success-stories", icon: <HistoryOutlined /> },
+      { title: "Notifications", path: "/notifications", icon: <NotificationsOutlined /> },
+      { title: "System Settings", path: "/settings", icon: <SettingsOutlined /> },
     ],
     vendor: [
       { title: "Packages", path: "/packages", icon: <InventoryOutlined /> },
@@ -96,14 +106,15 @@ const SideBar = () => {
         zIndex: 1000,
         borderRightWidth: "1px",
         borderRightStyle: "solid",
-        borderColor: "#2B3990",
+        borderColor: "#d88cb4",
         WebkitTransition: "width, left, right, 300ms",
         transition: "width, left, right, 300ms",
         width: collapsed ? "80px" : "250px",
         zIndex: 1000,
         minWidth: collapsed ? "80px" : "250px",
         border: 0,
-        background: "#2B3990",
+        background: "linear-gradient(180deg, #d88cb4 0%, #ad7090 50%, #82546c 100%)",
+        boxShadow: "0 8px 32px rgba(216, 27, 96, 0.15)",
         "@media (max-width: 768px)": {
           width: toggled ? "250px" : "0px",
           minWidth: toggled ? "250px" : "0px",
@@ -174,14 +185,17 @@ const SideBar = () => {
           menuItemStyles={{
             button: {
               transition: "all 0.4s ease",
-              fontWeight: "bold",
+              fontWeight: "600",
               color: "#FFFFFF",
               fontSize: { xs: "14px", sm: "16px" },
-              padding: { xs: "8px 12px", sm: "12px 16px" },
+              padding: { xs: "12px 16px", sm: "16px 20px" },
+              margin: "4px 8px",
+              borderRadius: "12px",
               ":hover": {
                 color: "#FFFFFF",
-                background: "rgba(255,255,255,0.1)",
-                transform: "translateX(4px)",
+                background: "rgba(255,255,255,0.2)",
+                transform: "translateX(8px)",
+                boxShadow: "0 4px 12px rgba(255,255,255,0.1)",
               },
             },
           }}
@@ -199,14 +213,17 @@ const SideBar = () => {
           menuItemStyles={{
             button: {
               transition: "all 0.4s ease",
-              fontWeight: "bold",
+              fontWeight: "600",
               color: "#FFFFFF",
               fontSize: { xs: "14px", sm: "16px" },
-              padding: { xs: "8px 12px", sm: "12px 16px" },
+              padding: { xs: "12px 16px", sm: "16px 20px" },
+              margin: "4px 8px",
+              borderRadius: "12px",
               ":hover": {
                 color: "#FFFFFF",
-                background: "rgba(255,255,255,0.1)",
-                transform: "translateX(4px)",
+                background: "rgba(255,255,255,0.2)",
+                transform: "translateX(8px)",
+                boxShadow: "0 4px 12px rgba(255,255,255,0.1)",
               },
             },
           }}
