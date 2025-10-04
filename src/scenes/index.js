@@ -3,6 +3,7 @@ import SideBar from "./layout/sidebar";
 import Dashboard from "./dashboard";
 import Calendar from "./vendor/Services";
 import Bar from "./bar";
+import Transactions from "./admin/Transactions";
 
 export {
   Navbar,
@@ -10,4 +11,5 @@ export {
   Dashboard,
   Calendar,
   Bar,
+  Transactions,
 };

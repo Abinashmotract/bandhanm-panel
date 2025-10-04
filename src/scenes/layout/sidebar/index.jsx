@@ -32,7 +32,8 @@ import {
   NotificationsOutlined,
   FavoriteOutlined,
   ChatOutlined,
-  VerifiedUserOutlined
+  VerifiedUserOutlined,
+  ReceiptOutlined
 } from "@mui/icons-material";
 import Item from "./Item";
 import { ToggledContext } from "../../../App";
@@ -70,6 +71,7 @@ const SideBar = () => {
     admin: [
       { title: "User Management", path: "/user-management", icon: <PeopleAltOutlined /> },
       { title: "Subscription Management", path: "/subscription-management", icon: <CardMembershipOutlined /> },
+      { title: "Transactions", path: "/transactions", icon: <ReceiptOutlined /> },
       { title: "Matches & Connections", path: "/matches", icon: <FavoriteOutlined /> },
       { title: "Messages & Chats", path: "/messages", icon: <ChatOutlined /> },
       { title: "Verification Center", path: "/verification", icon: <VerifiedUserOutlined /> },
@@ -110,7 +112,6 @@ const SideBar = () => {
         WebkitTransition: "width, left, right, 300ms",
         transition: "width, left, right, 300ms",
         width: collapsed ? "80px" : "250px",
-        zIndex: 1000,
         minWidth: collapsed ? "80px" : "250px",
         border: 0,
         background: "linear-gradient(180deg, #d88cb4 0%, #ad7090 50%, #82546c 100%)",

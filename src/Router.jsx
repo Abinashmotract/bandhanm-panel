@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate, } from "react-router-dom";
 import App from "./App";
-import { Dashboard } from "./scenes";
+import { Dashboard, Transactions } from "./scenes";
 import Login from "./components/Login";
 import PrivateRoute from "./utils/PrivateRoute";
 import { useAuth } from "./utils/context/AuthContext";
@@ -25,6 +25,7 @@ const AppRouter = () => {
             <Route index element={<Dashboard />} />
             <Route path="user-management" element={<UserManagement />} />
             <Route path="subscription-management" element={<SubscriptionManagement />} />
+            <Route path="transactions" element={<Transactions />} />
             <Route path="matches" element={<div>Matches & Connections - Coming Soon</div>} />
             <Route path="messages" element={<div>Messages & Chats - Coming Soon</div>} />
             <Route path="verification" element={<div>Verification Center - Coming Soon</div>} />
