@@ -198,7 +198,7 @@ const Transactions = () => {
           startIcon={<RefreshIcon />}
           onClick={() => fetchTransactions(pagination.currentPage)}
           variant="outlined"
-          sx={{ color: colors?.primary?.[600] || '#d81b60' }}
+          sx={{ color: colors?.primary?.[600] || '#51365F' }}
         >
           Refresh
         </Button>

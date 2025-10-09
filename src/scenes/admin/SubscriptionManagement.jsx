@@ -360,7 +360,7 @@ const SubscriptionManagement = () => {
           startIcon={<AddIcon />}
           onClick={handleCreatePlan}
           sx={{
-            background: 'linear-gradient(135deg, #d81b60 0%, #ad1457 100%)',
+            background: 'linear-gradient(135deg, #51365F 0%, #ad1457 100%)',
             '&:hover': {
               background: 'linear-gradient(135deg, #ad1457 0%, #880e4f 100%)',
             },
@@ -421,7 +421,7 @@ const SubscriptionManagement = () => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="h6" sx={{ color: plan.price === 0 ? '#4caf50' : '#d81b60' }}>
+                    <Typography variant="h6" sx={{ color: plan.price === 0 ? '#4caf50' : '#51365F' }}>
                       {plan.price === 0 ? 'Free' : `₹${plan.price}`}
                     </Typography>
                   </TableCell>
@@ -500,7 +500,7 @@ const SubscriptionManagement = () => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="h6" sx={{ color: plan.price === 0 ? '#4caf50' : '#d81b60' }}>
+                    <Typography variant="h6" sx={{ color: plan.price === 0 ? '#4caf50' : '#51365F' }}>
                       {plan.price === 0 ? 'Free' : `₹${plan.price}`}
                     </Typography>
                   </TableCell>

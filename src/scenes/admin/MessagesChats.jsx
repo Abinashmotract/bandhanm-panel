@@ -180,7 +180,7 @@ const MessagesChats = () => {
           onClick={fetchMessages}
           disabled={loading}
           sx={{
-            background: 'linear-gradient(135deg, #d81b60 0%, #ad1457 100%)',
+            background: 'linear-gradient(135deg, #51365F 0%, #ad1457 100%)',
             '&:hover': {
               background: 'linear-gradient(135deg, #ad1457 0%, #880e4f 100%)',
             },
@@ -209,7 +209,7 @@ const MessagesChats = () => {
             <Card>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <MessageIcon sx={{ color: '#d81b60', mr: 1 }} />
+                  <MessageIcon sx={{ color: '#51365F', mr: 1 }} />
                   <Box>
                     <Typography variant="h6" sx={{ color: '#000', fontWeight: 'bold' }}>
                       {stat.count}

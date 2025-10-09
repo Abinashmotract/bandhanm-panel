@@ -98,7 +98,7 @@ const Navbar = () => {
         position: "sticky",
         top: 0,
         zIndex: 100,
-        background: "#2B3990",
+        background: "#51365F",
         minHeight: { xs: "48px", sm: "56px" } // Reduce height
       }}
     >

@@ -160,7 +160,7 @@ const MatchesConnections = () => {
           onClick={fetchMatches}
           disabled={loading}
           sx={{
-            background: 'linear-gradient(135deg, #d81b60 0%, #ad1457 100%)',
+            background: 'linear-gradient(135deg, #51365F 0%, #ad1457 100%)',
             '&:hover': {
               background: 'linear-gradient(135deg, #ad1457 0%, #880e4f 100%)',
             },

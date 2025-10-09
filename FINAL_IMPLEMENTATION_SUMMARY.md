@@ -93,7 +93,7 @@ The BandhanM admin panel has been completely transformed into a fully functional
 ```javascript
 // Primary Colors
 weddingPink: {
-  600: "#d81b60", // Main pink
+  600: "#51365F", // Main pink
   700: "#ad1457",
   800: "#880e4f"
 }

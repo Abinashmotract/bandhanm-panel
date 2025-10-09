@@ -10,7 +10,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useContext, useState, useEffect } from "react";
-import logo from "../../../assets/images/LOGO2.svg";
+import logo from "../../../assets/images/bandhnm.png";
 import { tokens } from "../../../theme";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import {
@@ -114,7 +114,7 @@ const SideBar = () => {
         width: collapsed ? "80px" : "250px",
         minWidth: collapsed ? "80px" : "250px",
         border: 0,
-        background: "linear-gradient(180deg, #d88cb4 0%, #ad7090 50%, #82546c 100%)",
+        background: "#51365F",
         boxShadow: "0 8px 32px rgba(216, 27, 96, 0.15)",
         "@media (max-width: 768px)": {
           width: toggled ? "250px" : "0px",
@@ -149,12 +149,12 @@ const SideBar = () => {
                 <img
                   alt="avatar"
                   src={logo}
-                  height={isMobile ? "40" : "50"}
-                  style={{
-                    maxWidth: "100%",
-                    filter: "brightness(0) invert(1)",
-                    transition: "0.3s ease",
-                  }}
+                  height={isMobile ? "40" : "70"}
+                  // style={{
+                  //   maxWidth: "100%",
+                  //   filter: "brightness(0) invert(1)",
+                  //   transition: "0.3s ease",
+                  // }}
                 />{" "}
               </Box>
             )}
